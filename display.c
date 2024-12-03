@@ -11,7 +11,7 @@
 // 출력할 내용들의 좌상단(topleft) 좌표
 const POSITION resource_pos = { 0, 0 };
 const POSITION map_pos = { 1, 0 };
-const POSITION status_pos = { 1, MAP_WIDTH + 2 }; // 상태창 위치 정의
+const POSITION status_pos = { 1, MAP_WIDTH + 2 };
 
 char backbuf[MAP_HEIGHT][MAP_WIDTH] = { 0 };
 char frontbuf[MAP_HEIGHT][MAP_WIDTH] = { 0 };
@@ -27,12 +27,12 @@ void display(
     RESOURCE resource,
     char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH],
     CURSOR cursor,
-    bool is_selected // 추가된 인자
+    bool is_selected
 ) {
     display_resource(resource);
     display_map(map);
     display_cursor(cursor);
-    display_object_info(map, cursor, is_selected); // 수정된 부분
+    display_object_info(map, cursor, is_selected);
     //display_system_message();
     //display_commands();
 }
@@ -51,16 +51,16 @@ void display_resource(RESOURCE resource) {
 void display_object_info(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], CURSOR cursor, bool is_selected) {
     POSITION curr = cursor.current; // 현재 커서 위치
 
-    // 오브젝트와 유닛 구분하여 확인
-    char current_object = map[0][curr.row][curr.column]; // 오브젝트는 첫 번째 레이어
-    char current_unit = map[1][curr.row][curr.column];   // 유닛은 두 번째 레이어
+    // 오브젝트 1 유닛 2
+    char current_object = map[0][curr.row][curr.column]; 
+    char current_unit = map[1][curr.row][curr.column];
 
     // 상태창 초기화
     gotoxy(status_pos);
-    if (is_selected) { // 선택된 상태일 때만 출력
-        printf("상태: "); // 줄바꿈 없이 상태 표시 시작
+    if (is_selected) {
+        printf("상태: ");
 
-        // 유닛 확인 (현재 유닛이 있는 경우)
+        // 유닛 확인
         switch (current_unit) {
         case 'H':
             printf("하베스터");
@@ -69,7 +69,7 @@ void display_object_info(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], CURSOR cursor
             printf("  샌드웜");
             break;
         default:
-            // 유닛이 없을 경우 오브젝트 정보를 출력
+            //오브젝트 정보
             switch (current_object) {
             case 'B':
                 printf("    본진");
@@ -91,8 +91,7 @@ void display_object_info(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], CURSOR cursor
         }
     }
     else {
-        // 상태창 비우기: 상태창의 폭만큼 공백 출력
-        printf("                    "); // 상태창 폭에 맞춰 충분한 공백 출력
+        printf("                           ");
     }
 }
 
@@ -116,12 +115,8 @@ void display_map(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH]) {
 
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
-            // 기본 색상을 설정
-            int color = COLOR_DEFAULT; // 기본 색상
-
-            // 위치에 따른 색상 지정
+            int color = COLOR_DEFAULT;
             char current_tile = backbuf[i][j];
-
             if (current_tile == 'H') {
                 if (i < MAP_HEIGHT / 2) {
                     color = AI_BASE; // AI 지역
@@ -139,19 +134,17 @@ void display_map(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH]) {
                 }
             }
             else if (current_tile == 'P') {
-                color = TILE; // 일반 타일 색상
+                color = TILE; //장판
             }
             else if (current_tile == 'W') {
-                color = SAND; // 모래 색상
+                color = SAND; //샌드웜
             }
             else if (current_tile == 'S') {
-                color = SPICE; // 향신료 색상
+                color = SPICE; //스파이스
             }
             else if (current_tile == ' ') {
-                color = OTHER; // 다른 타일 색상
+                color = OTHER; // 빈공간
             }
-
-            // 화면에 출력
             if (frontbuf[i][j] != backbuf[i][j]) {
                 POSITION pos = { i, j };
                 printc(padd(map_pos, pos), backbuf[i][j], color); // 지정된 색상으로 출력
@@ -192,9 +185,8 @@ void display_cursor(CURSOR cursor) {
     // 이전 위치를 해당 색상으로 출력
     printc(padd(map_pos, prev), prev_ch, prev_color);
 
-    // 현재 위치의 문자(ch)도 색상에 맞게 출력
     char curr_ch = frontbuf[curr.row][curr.column];
-    int curr_color = COLOR_DEFAULT; // 기본 색상으로 설정
+    int curr_color = COLOR_DEFAULT;
 
     if (curr_ch == 'H' || curr_ch == 'B') {
         curr_color = (curr.row < MAP_HEIGHT / 2) ? AI_BASE : PLYAER_BASE;

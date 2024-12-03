@@ -42,9 +42,9 @@ int main(void) {
 
     init();
     intro();
-    display(resource, map, cursor, false);  // 초기 호출 시 is_selected를 false로 전달
+    display(resource, map, cursor, false);
 
-    bool is_selected = false; // 선택 상태를 저장하는 변수
+    bool is_selected = false;
 
     while (1) {
         // loop 돌 때마다(즉, TICK==10ms마다) 키 입력 확인
@@ -54,15 +54,15 @@ int main(void) {
         if (is_arrow_key(key)) {
             int current_time = sys_clock;
 
-            // 마지막 방향키와 현재 방향키가 같고, 시간 차가 짧다면 5칸 이동
+            // 4칸 이동
             if (key == last_key && (current_time - last_key_time) < 200) {
-                cursor_move(ktod(key)); // 첫 1칸 이동
+                cursor_move(ktod(key));
                 cursor_move(ktod(key));
                 cursor_move(ktod(key));
                 cursor_move(ktod(key));
             }
             else {
-                cursor_move(ktod(key)); // 일반 1칸 이동
+                cursor_move(ktod(key));
             }
 
             last_key = key;

@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\display.c">
+    <ClCompile Include="..\..\..\..\..\OneDrive\바탕 화면\display.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\engine.c">
+    <ClCompile Include="..\..\..\..\..\OneDrive\바탕 화면\engine.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\io.c">
+    <ClCompile Include="..\..\..\..\..\OneDrive\바탕 화면\io.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\common.h">
+    <ClInclude Include="..\..\..\..\..\OneDrive\바탕 화면\common.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\display.h">
+    <ClInclude Include="..\..\..\..\..\OneDrive\바탕 화면\display.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\바탕 화면\dune 1.5_skeleton (1)\io.h">
+    <ClInclude Include="..\..\..\..\..\OneDrive\바탕 화면\io.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
